@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トレーニング</title>
+    <!-- This code was written by kangping. -->
+    <style>
+        #hisk{
+            text-shadow: 1px 1px 1px grey;
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <a id="monndai" style="font-size: 30pt;"></a><br>
+    <a id="monndai2">　</a><a style="font-size: 20pt;" id="monndai3"></a>
+    <div id="nyuuryoku">
+        <img src="./button.png" style="width:100px;margin-top: 20px;" onclick="next_qestion()">
+    </div>
+    <div id="radio">
+        <label><input type="radio" name="mode" onclick="next_qestion(1)" value="1"checked><a id="ue">上二桁値</a></label>
+        <label><input type="radio" name="mode" onclick="next_qestion(2)" value="2"><a id="sita">下二桁値</a></label>
+        <label><input type="radio" name="mode" onclick="next_qestion(3)" value="3"><a id="tuki">月値</a></label>
+    </div>
+    <div id="radio">
+        <label><input type="radio" name="honyaku" onclick="honyaku(0)" value="1" checked>Japanese</label>
+        <label><input type="radio" name="honyaku" onclick="honyaku(1)" value="2">English</label>
+        <label><input type="radio" name="honyaku" onclick="honyaku(2)" value="3">Chinese</label>
+    </div>
+    <br>
+    <a>powerd by</a><a href="https://kangping.jp">kangping</a>
+    <script>
+        var nyuuryoku = ""
+        var if_nyuuryoku_ok = true
+        var kotae = 0
+        var i = 0
+        var c = [0,0,3,2,5,0,3,5,1,4,6,2,4]
+        var honyaku_list = [["上二桁値","下二桁値","月値"],["First 2 digit","Last 2 digit","Month Value"],["前两位数","后两位数","月数"]]
+        var b = null
+        function timer(){
+            // if (localStorage.getItem("hisk")){
+                // document.getElementById("hisk").innerText = "ハイスコアは" + localStorage.getItem("hisk") + "です"
+            // }
+            
+        }
+        function honyaku(a){
+            document.getElementById("ue").innerText = honyaku_list[a][0]
+            document.getElementById("sita").innerText = honyaku_list[a][1]
+            document.getElementById("tuki").innerText = honyaku_list[a][2]
+        }
+        function next_qestion(a = 0){
+            if (a == 0){
+                var element = document.getElementsByName("mode");
+                for (var i = 0;i < 3;++i){
+                    if (element[i].checked == true){
+                        a = element[i].value;
+                    }
+                }
+            }
+            if (b != null){
+                document.getElementById("monndai2").innerText = b + "→";
+                document.getElementById("monndai3").innerText = kotae
+            }
+            if (a == 1){
+                b = Math.floor(Math.random() * 10)+16
+                document.getElementById("monndai").innerText = b
+                if (b % 4 == 0){
+                    kotae = 0
+                }else if (b % 4 == 1){
+                    kotae = 5
+                }else if (b % 4 == 2){
+                    kotae = 3
+                }else if (b % 4 == 3){
+                    kotae = 1
+                }
+            }else if (a == 2){
+                b = Math.floor(Math.random() * 100)
+                document.getElementById("monndai").innerText = b
+                kotae = (b+Math.floor(b/4)) % 7
+            }else{
+                b = Math.floor(Math.random() * 12)+1
+                document.getElementById("monndai").innerText = b
+                kotae = c[b]
+            }
+        }
+        function clickck(a){
+            if (if_nyuuryoku_ok){
+                if (kotae == a){
+                    document.getElementById("str1").innerText = "正解"
+                }else{
+                    document.getElementById("str1").innerText = "不正解"
+                }
+                setTimeout(yokonagasi,1000)
+            }
+            next_qestion()
+        }
+        function yokonagasi(){
+            document.getElementById("str1").innerText = ""
+        }
+        next_qestion()
+        //(a+Math.floor(a/4)) % 7
+        setInterval(timer,0)
+    </script>
+</body>
+</html>
