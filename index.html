@@ -18,7 +18,7 @@
     <div id="nyuuryoku">
         <img src="./button.png" style="width:100px;margin-top: 20px;" onclick="next_qestion()">
     </div>
-    <div id="radio">
+    <div id="radio" style="margin-top: 30px;">
         <label><input type="radio" name="mode" onclick="next_qestion(1)" value="1"checked><a id="ue">上二桁値</a></label>
         <label><input type="radio" name="mode" onclick="next_qestion(2)" value="2"><a id="sita">下二桁値</a></label>
         <label><input type="radio" name="mode" onclick="next_qestion(3)" value="3"><a id="tuki">月値</a></label>
@@ -29,14 +29,16 @@
         <label><input type="radio" name="honyaku" onclick="honyaku(2)" value="3">Chinese</label>
     </div>
     <br>
-    <a>powerd by</a><a href="https://kangping.jp">kangping</a>
+    <a id="str4">スピードカレンダー丸暗記法</a>
+    <br>
+    <a>powerd by </a><a href="https://kangping.jp">kangping</a>
     <script>
         var nyuuryoku = ""
         var if_nyuuryoku_ok = true
         var kotae = 0
         var i = 0
         var c = [0,0,3,2,5,0,3,5,1,4,6,2,4]
-        var honyaku_list = [["上二桁値","下二桁値","月値"],["First 2 digit","Last 2 digit","Month Value"],["前两位数","后两位数","月数"]]
+        var honyaku_list = [["上二桁値","下二桁値","月値","スピードカレンダー丸暗記法"],["First 2 digit","Last 2 digit","Month Value","SpeedCalendar Full Memorization Method"],["前两位数","后两位数","月数","速度日历死记硬背法"]]
         var b = null
         function timer(){
             // if (localStorage.getItem("hisk")){
@@ -48,6 +50,7 @@
             document.getElementById("ue").innerText = honyaku_list[a][0]
             document.getElementById("sita").innerText = honyaku_list[a][1]
             document.getElementById("tuki").innerText = honyaku_list[a][2]
+            document.getElementById("str4").innerText = honyaku_list[a][3]
         }
         function next_qestion(a = 0){
             if (a == 0){
